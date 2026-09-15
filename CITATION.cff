@@ -1,14 +1,14 @@
 cff-version: 1.2.0
-title: "Emotion Control Systems Exploration: Attachment, Memory, Prediction Error, Self-Models, and Body-State Feedback in Emotion-Like Agent Behavior"
+title: "From Attachment to Emotion-Like Control: An AI-Assisted Exploratory Computational Study of Value, Memory, Prediction Error, Self-Models, and Body-State Feedback"
 message: "If you use or discuss this work, please cite it using the metadata in this file."
 type: software
 authors:
   - family-names: "Fukuoka"
     given-names: "Shinobu"
-    name-suffix: ""
     affiliation: "Independent Researcher"
 repository-code: "https://github.com/fukuoka1980521-beep/emotion-control-systems-exploration"
 url: "https://github.com/fukuoka1980521-beep/emotion-control-systems-exploration"
+doi: "10.5281/zenodo.22780290"
 abstract: >-
   Exploratory computational experiments examining whether emotion-like functional patterns can arise from combinations of value, attachment, memory, prediction error, agent identity, self-models, and body-state feedback. The work explicitly distinguishes functional emotion-like behavior from subjective feeling and preserves negative findings, design failures, and corrective experiments.
 keywords:
@@ -21,5 +21,5 @@ keywords:
   - self-model
   - interoception
   - emotion-like behavior
-version: "0.9.0-pre-release"
+version: "1.0.0"
 date-released: "2026-09-16"
