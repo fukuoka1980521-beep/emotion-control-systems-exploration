@@ -1,90 +1,185 @@
-# Emotion Control Systems Exploration
+# 感情は「執着」から生まれるのか？
 
-Exploratory computational experiments on attachment, memory, prediction error, self-models, and body-state feedback in emotion-like agent behavior.
+**Emotion Control Systems Exploration**  
+福岡 忍 / Shinobu Fukuoka
 
-## Status
+この研究は、私がChatGPTとの会話の中でふと思った、かなり素朴な疑問から始まりました。
 
-**Pre-release research repository.** The experiments are complete through V8.1, but the public research package is still being prepared. A DOI release has **not** yet been issued.
+> **感情につながる一番の道は、執着なんじゃないか？**
 
-## Core question
+大切なものを失いたくないから怖くなる。  
+失えば悲しい。  
+戻ってくればうれしい。  
+邪魔されれば腹が立つ。
 
-Can emotion-like functional patterns emerge in artificial agents from general control mechanisms such as value, attachment, memory, prediction, self-models, and body-state feedback, without directly programming named emotions such as fear, grief, anger, jealousy, shame, or guilt?
+では、人工的なエージェントに「恐怖」「悲しみ」「怒り」といった感情名を直接与えず、**価値あるものへの執着だけ**を持たせたら、どこまで感情に似た行動が出るのか。
 
-The project began from a deliberately simple hypothesis:
+面白そうだったので、実際に小さな計算実験を作って試してみました。
 
-> Attachment may be a major gateway into emotion-like behavior.
+最初は、執着だけでかなり説明できるのではないかと思っていました。ところが実験を続けると、そう簡単ではありませんでした。
 
-The experiments were then designed to break, narrow, or refine that hypothesis rather than to confirm it.
+**嫉妬が出ない。**  
+**怒りらしい反応には「誰がやったか」が必要になる。**  
+**相手が変わっても、古い評価を引きずる。**  
+**同じ被害でも、信頼していた相手から受けると内部の変化量が違う。**  
+**自分自身についてのモデルを傷つけると、反応の種類が変わる。**  
+**身体状態まで入れると、同じ出来事への反応の強さや持続が変わる。**
 
-## Current working model
+そうやって、最初の仮説を証明するというより、**実験で壊しては作り直す**ことをV1からV8.1まで繰り返しました。
 
-The experiments do **not** support the claim that attachment alone explains emotion. A better working model is:
+このリポジトリは、その記録です。
 
-> emotion-like functional response ≈ value / attachment × world model × memory × prediction error × self-model × body state
+---
 
-with persistence further affected by learning rate and by which new evidence the agent chooses to sample.
+## 先に、誤解されたくないこと
 
-This is a model of **functional emotion-like behavior**, not evidence of subjective feeling or consciousness in AI.
+この研究で「AIに本物の感情が生まれた」と主張するつもりはありません。
 
-## Experiment series
+シミュレーションの中で起きたのは、あくまで**感情の一部に似た機能的な行動パターン**です。
 
-| Version | Main question | Key result |
+たとえば、
+
+- 大切な対象が危険になると守ろうとする
+- 対象を失うと探し続ける
+- 反復して邪魔する相手には、その相手へ直接対処する
+- 相手が変わっても、過去の学習によって反応が残る
+- 自分の能力・評判・一貫性が傷つくと、別の修復行動を取る
+
+といった現象です。
+
+これを「恐怖を感じた」「恨んだ」「恥ずかしいと思った」とは言いません。
+
+**行動が似ていることと、主観的に感じていることは別です。**
+
+また、計算感情、強化学習、appraisal theory、homeostatic regulation、interoceptionなどには、すでに多くの先行研究があります。この研究は「世界初の感情理論」ではありません。
+
+私が面白いと思っているのは、**一つの素朴な仮説から始め、否定された結果や設計ミスも残しながら、必要な構造を一つずつ見つけていった過程**の方です。
+
+---
+
+## 実験して分かったこと
+
+最初の「執着だけで感情を説明できるのでは」という考えは、そのままでは残りませんでした。
+
+現在のところ、私は次のように考えています。
+
+> **執着は、感情そのものではなく、反応の重みを作る土台の一つかもしれない。**
+>
+> そこに、記憶、相手の識別、将来予測、予想と現実の差、自分についてのモデル、身体状態などが重なり、異なる感情様反応へ分岐する。
+
+かなり乱暴に書けば、現在の作業仮説はこうです。
+
+> **emotion-like response ≈ value / attachment × world model × memory × prediction error × self-model × body state**
+
+さらに、古い評価がどれくらい速く更新されるか、そして自分が新しい証拠を見に行くかどうかによって、反応の持続時間も変わりました。
+
+これは「人間の感情はこうできている」という結論ではなく、**次に人間や動物のデータで確かめられる仮説を作るためのモデル**です。
+
+---
+
+## 実験の流れ
+
+| Version | 試したこと | 何が起きたか |
 |---|---|---|
-| V1 | Can attachment produce simple emotion-like behavior? | Protection, search after loss, and reunion-related value changes emerged functionally. |
-| V2 | Can one attachment variable generate several distinct patterns? | Threat, loss, recovery, and obstruction differentiated; jealousy did not emerge from attachment alone. |
-| V3 / V3.1 | What separates obstruction handling from anger-like actor-directed response? | Cause, intentionality, and unjustified interference changed actor-directed behavior; a design leak was corrected in V3.1. |
-| V4 | Can actor-directed intervention be learned without explicit fairness or anger rules? | Identity-specific memory plus outcome learning differentiated persistent, accidental, and protective actors. |
-| V5 / V5.1 | Can resentment-like persistence arise after an actor reforms? | Persistence depended on memory update and on whether the agent sampled new evidence; policy lock-in was identified as a confound. |
-| V6 | Does betrayal depend on expectation gap? | Equal harm produced very different prediction errors depending on prior expectations; shock and punishment separated. |
-| V7 / V7.1 | Can self-model threat produce shame-, humiliation-, or guilt-like functional patterns? | Competence, social regard, and integrity losses produced different repair policies; a false-positive design error was corrected in V7.1. |
-| V8 / V8.1 | Does body state modulate and feed back into emotion-like control? | Arousal, fatigue, pain, memory, action, and damage formed a closed-loop control system that altered later defensive responses. |
+| V1 | 執着から単純な感情様行動が出るか | 保護、喪失後の探索、再会時の価値変化が出た |
+| V2 | 執着1変数だけで複数の感情様反応が出るか | 恐怖様・悲嘆様・喜び様は出たが、**嫉妬は出なかった** |
+| V3 / V3.1 | 単なる妨害と怒り様反応は何が違うか | 原因主体、故意性、不当性が重要。設計漏れをV3.1で修正 |
+| V4 | 「悪意」を教えなくても相手への直接介入を学ぶか | 人物記憶と経験だけで相手ごとの反応が分化 |
+| V5 / V5.1 | 相手が改心しても負の反応は残るか | 記憶だけでなく、新しい証拠を見に行かないことが持続を強めた |
+| V6 | 同じ被害でも裏切りは違うか | 信頼相手からの同一被害は予測誤差が最大。ただしショックと制裁は別だった |
+| V7 / V7.1 | 自分自身を執着対象にすると何が起きるか | 能力、社会的評価、一貫性の損失で異なる修復行動へ分岐。V7の偽陽性を修正 |
+| V8 / V8.1 | 身体状態を入れるとどうなるか | 覚醒・疲労・痛み・記憶・行動が閉ループを作り、その後の反応まで変えた |
 
-## Research integrity rules
+詳しい実験索引は [`docs/EXPERIMENT_INDEX.md`](docs/EXPERIMENT_INDEX.md) にあります。
 
-This repository follows several rules that are important to interpreting the results:
+---
 
-- Null and inconvenient results are retained.
-- Failed or flawed experimental designs are documented rather than hidden.
-- Corrected versions are labeled separately instead of silently replacing earlier conclusions.
-- A functional behavior pattern is never treated as proof of subjective emotion.
-- Human-designed reward functions and action effects are explicitly separated from patterns that emerged through learning or interaction.
-- Claims are limited to what the simulations support.
+## この研究で、むしろ大事にしている失敗
 
-See `docs/RESEARCH_INTEGRITY.md` for details.
+私は研究者ではありません。だからこそ、AIがもっともらしい説明をした時に、それをそのまま「発見」にしてしまう危険があると思っています。
 
-## Relation to prior work
+実際、途中で何度も設計の問題が見つかりました。
 
-This project is **not** presented as the first computational model of emotion. It overlaps with established research in computational emotion, reinforcement learning, appraisal theory, homeostatic regulation, interoceptive inference, and self-conscious emotion.
+- V2では、執着だけでは嫉妬が出なかった
+- V3では、自然障害に対して存在しない「相手」を攻撃できる設計漏れがあった
+- V5では、「恨み」に見えた一部が、古い行動を繰り返して新証拠を得ない**policy lock-in**でも説明できた
+- V6では、「信頼していた相手の裏切りほど強く制裁する」という予想は成立しなかった
+- V7では、自己モデルが傷ついていない外部損失でもrepairが有利になる偽陽性があり、V7.1で修正した
 
-A focused literature comparison is maintained in `docs/RELATED_WORK.md`.
+こうした結果は消していません。
 
-Key starting points include:
+**うまくいかなかった結果の方が、仮説を次へ進めたことが何度もあったからです。**
 
-- Moerland, Broekens & Jonker (2018), *Emotion in reinforcement learning agents and robots: a survey*. https://doi.org/10.1007/s10994-017-5666-0
-- Sequeira, Melo & Paiva (2015), *Emergence of emotional appraisal signals in reinforcement learning agents*. https://doi.org/10.1007/s10458-014-9262-4
-- Ojha, Vitale & Williams (2021), *Computational emotion models: a thematic review*. https://doi.org/10.1007/s12369-020-00713-1
-- Keramati & Gutkin (2014), *Homeostatic reinforcement learning for integrating reward collection and physiological stability*. https://doi.org/10.7554/eLife.04811
-- Seth (2013), *Interoceptive inference, emotion, and the embodied self*. https://doi.org/10.1016/j.tics.2013.09.007
-- Seth & Friston (2016), *Active interoceptive inference and the emotional brain*. https://doi.org/10.1098/rstb.2016.0007
-- Sznycer (2019), *Forms and Functions of the Self-Conscious Emotions*. https://doi.org/10.1016/j.tics.2018.11.007
+研究上の扱い方については [`docs/RESEARCH_INTEGRITY.md`](docs/RESEARCH_INTEGRITY.md) にまとめています。
 
-## Repository roadmap before v1.0
+---
 
-Before the first DOI release, this repository will receive:
+## 先行研究との関係
 
-1. experiment code and reproducible parameters,
-2. summary and raw result tables,
-3. figures,
-4. the integrated research report,
-5. AI-use disclosure,
-6. citation metadata,
-7. license information,
-8. a frozen v1.0 release for archival deposit.
+このテーマには長い研究の蓄積があります。
 
-## AI-use disclosure
+特に近い領域は、
 
-AI systems were used substantially in the exploratory process, including discussion, model implementation, simulation execution, error discovery, revision, literature search support, and drafting. The research package will explicitly document that role rather than presenting the work as unaided human analysis.
+- computational emotion
+- reinforcement learning and emotion
+- appraisal theory
+- homeostatic reinforcement learning
+- interoceptive inference
+- self-conscious emotions
+
+です。
+
+代表的な出発点として、Moerland, Broekens & Jonker (2018)、Sequeira, Melo & Paiva (2015)、Keramati & Gutkin (2014)、Seth (2013)、Seth & Friston (2016)、Sznycer (2019) などを参照しています。
+
+「どこが既存研究と近く、どこが今回の探索の特徴なのか」は [`docs/RELATED_WORK.md`](docs/RELATED_WORK.md) に整理しています。
+
+---
+
+## AIと一緒に行った研究です
+
+この点は隠しません。
+
+発想の出発点は私自身の疑問ですが、ChatGPTは単なる文章作成ツールではなく、実験を進める過程でかなり深く使っています。
+
+仮説を分解する、コードを書く、シミュレーションを実行する、結果を疑う、設計ミスを探す、追加実験を作る、先行研究を調べる、文章をまとめる、といった作業にAIが関与しています。
+
+だからこの研究を、通常の意味で「私が一人で行った学術研究」のようには見せません。
+
+一方で、何を疑うか、どこで止めるか、どの結果を残すか、都合の悪い結果を消さないか、最終的に何を公開するかは、人間側の判断として行っています。
+
+詳しくは [`docs/AI_USE_DISCLOSURE.md`](docs/AI_USE_DISCLOSURE.md) に記載しています。
+
+---
+
+## 現在の公開状態
+
+現在は **v1.0公開前の準備中** です。
+
+V1〜V8.1の実験自体は終了していますが、GitHub上では、各実験について
+
+- 実行コードがそのまま残っているもの
+- 結果ファイルは残っているが、コードを再構成する必要があるもの
+
+を分けて整理しています。
+
+DOIはまだ発行していません。再現性の状態を [`docs/REPRODUCIBILITY_STATUS.md`](docs/REPRODUCIBILITY_STATUS.md) に記録し、公開条件を満たしてからv1.0を固定し、Zenodoへ保存する予定です。
+
+---
+
+## Author
+
+**福岡 忍 / Shinobu Fukuoka**  
+Independent researcher / project originator
+
+著者情報は [`AUTHORS.md`](AUTHORS.md) にあります。
+
+---
 
 ## License
 
-License terms will be finalized before the v1.0 DOI release. Until then, no reuse license should be inferred from the public visibility of this repository.
+- **Source code:** MIT License
+- **Reports, documentation, figures, and research data:** Creative Commons Attribution 4.0 International (CC BY 4.0)
+
+再利用する場合は、福岡 忍 / Shinobu Fukuoka と本リポジトリを出典として示してください。
+
+詳細は `LICENSE-CODE` と `LICENSE-CONTENT.md` を参照してください。
