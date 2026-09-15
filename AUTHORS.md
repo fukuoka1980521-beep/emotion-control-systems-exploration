@@ -1,17 +1,37 @@
 # Author
 
-## Shinobu Fukuoka / 福岡 忍
+## 福岡 忍 / Shinobu Fukuoka
 
-Independent researcher and project originator.
+この研究を始めた本人です。
 
-This project began from a simple hypothesis posed in conversation: whether attachment to something valued could be a basic route into emotion-like behavior. The research series then deliberately tested, weakened, and revised that hypothesis through computational experiments.
+もともと私は、感情研究の専門家でも、AI研究者でもありません。
 
-## AI assistance
+きっかけはChatGPTとの会話の中で出てきた、
 
-OpenAI ChatGPT was used as a research assistant for literature search, hypothesis decomposition, simulation design, code generation, execution support, error detection, result interpretation, documentation, and publication preparation.
+> **「感情につながる一番の道は、執着なんじゃないか？」**
 
-AI assistance is disclosed separately in `docs/AI_USE_DISCLOSURE.md`.
+という疑問でした。
 
-## Responsibility
+怖さも、悲しさも、怒りも、うれしさも、何かを「失いたくない」「大切にしたい」と思うことから始まるのではないか。そう考えて、AIに「それなら実際に小さなモデルを作って試してみよう」と頼んだのが始まりです。
 
-The named human author is responsible for deciding what is published, for reviewing the claims and limitations, and for the final interpretation presented as this project's position.
+そこから実験を重ねるうちに、最初の考えでは説明できない結果が次々に出ました。嫉妬が出なかったり、裏切りのショックと制裁が別の動きをしたり、恨みに見えたものの一部が単なる学習のロックだったりしました。
+
+私は、その都度「うまくいったように見せる」のではなく、結果がおかしければ原因を調べ、仮説を直し、もう一度実験する方を選びました。
+
+このリポジトリは、その過程を残すためのものです。
+
+## AIとの役割分担
+
+ChatGPTは、この研究でかなり大きな役割を担っています。
+
+実験案の具体化、コード作成、実行、結果整理、設計上の問題の発見、修正実験、先行研究の探索、文章化など、多くの作業をAIと一緒に行いました。
+
+一方で、最初の問いを出したこと、どの方向へ進めるかを決めたこと、結果に違和感があった時に止めたこと、都合の悪い結果を残すと決めたこと、そして最終的に何を公開するかの責任は、私が持っています。
+
+AIの利用範囲は [`docs/AI_USE_DISCLOSURE.md`](docs/AI_USE_DISCLOSURE.md) に詳しく記載しています。
+
+## 公開上の責任
+
+この研究はAI支援を大きく受けていますが、公開する内容についての責任主体は **福岡 忍 / Shinobu Fukuoka** です。
+
+内容に誤りや過大な解釈が見つかった場合は、修正版を出し、変更履歴を残す方針です。
