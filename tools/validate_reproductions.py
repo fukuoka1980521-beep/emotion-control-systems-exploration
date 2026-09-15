@@ -11,6 +11,12 @@ ROOT = Path(__file__).resolve().parents[1]
 
 CASES = [
     (
+        "V3.1",
+        ROOT / "experiments/v3_1/reproduce_v3_1.py",
+        ROOT / "experiments/v3_1/preserved_summary.csv",
+        ROOT / "experiments/v3_1/generated/attachment_anger_v3_1_corrected_summary.csv",
+    ),
+    (
         "V5.1",
         ROOT / "experiments/v5_1/reproduce_v5_1.py",
         ROOT / "experiments/v5_1/preserved_metrics.csv",
