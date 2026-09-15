@@ -42,6 +42,13 @@ CASES = [
     ),
 ]
 
+# CSV round-tripping and different Python/pandas builds can represent the same
+# binary floating-point quantity as e.g. 0.53275 vs 0.5327500000000001.
+# We therefore require identical structure/text values and numerical agreement
+# within a very tight machine-precision tolerance.
+RTOL = 1e-12
+ATOL = 1e-12
+
 
 def main() -> int:
     failures: list[str] = []
@@ -54,22 +61,28 @@ def main() -> int:
         actual = pd.read_csv(generated)
 
         try:
-            assert_frame_equal(expected, actual, check_exact=True)
+            assert_frame_equal(
+                expected,
+                actual,
+                check_exact=False,
+                rtol=RTOL,
+                atol=ATOL,
+            )
         except AssertionError as exc:
             failures.append(label)
-            print("FAIL: regenerated values differ from preserved values")
+            print("FAIL: regenerated values differ beyond machine-precision tolerance")
             print(exc)
         else:
             print(
-                f"PASS: exact match ({expected.shape[0]} rows x "
-                f"{expected.shape[1]} columns)"
+                f"PASS: machine-precision match ({expected.shape[0]} rows x "
+                f"{expected.shape[1]} columns; rtol={RTOL:g}, atol={ATOL:g})"
             )
 
     if failures:
         print("\nValidation failed for:", ", ".join(failures))
         return 1
 
-    print("\nALL VALIDATED EXPERIMENTS MATCH PRESERVED OUTPUTS EXACTLY")
+    print("\nALL VALIDATED EXPERIMENTS MATCH PRESERVED OUTPUTS WITHIN MACHINE PRECISION")
     return 0
 
 
