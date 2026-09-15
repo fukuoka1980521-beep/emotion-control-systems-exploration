@@ -1,0 +1,4 @@
+condition,protect_threat_rate,search_loss_rate,search_late_rate,interact_post_restore_rate,bond_at_loss,loss_appraisal_drop,restore_appraisal_jump
+full_attachment,0.522,0.822,0.675,0.962,0.958,-0.876,2.435
+short_memory,0.519,0.452,0.25,0.88,0.958,-0.877,0.952
+value_only,0.131,0.285,0.246,0.844,0.0,-0.685,0.948
