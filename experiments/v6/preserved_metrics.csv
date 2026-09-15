@@ -1,0 +1,4 @@
+history,pre_mu,first_harm_prediction_error,first_harm_learning_rate,actor_after_1_harm,actor_after_10_harms,sanction_after_1_harm,recovery_actor_at_10,recovery_actor_at_50,recovery_actor_at_180
+helper,0.8766589924832615,-1.8766589924832615,0.4153317984966523,0.0,1.0,0.0,0.0,0.0,0.0
+neutral,0.06250606918884395,-1.062506069188844,0.2525012138377688,0.0,1.0,0.0,0.0,0.0,0.0
+hostile,-0.8295732628330883,-0.17042673716691178,0.07408534743338235,1.0,1.0,0.972,0.0,0.0,0.0
