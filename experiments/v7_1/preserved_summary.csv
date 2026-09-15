@@ -1,0 +1,6 @@
+scenario,self_value_delta,top_action,top_action_rate,ignore_rate,improve_rate,withdraw_rate,defend_rate,repair_rate
+external_loss,0.0,ignore,0.36,0.36,0.1828,0.1914,0.1364,0.1294
+private_failure,-0.6999999999999997,improve,0.694,0.1332,0.694,0.0684,0.0524,0.052
+public_failure,-1.25,improve,0.6434,0.1312,0.6434,0.1256,0.0488,0.051
+false_public_insult,-0.6999999999999997,defend,0.7684,0.0814,0.0422,0.0786,0.7684,0.0294
+own_moral_violation,-1.0499999999999998,repair,0.9072,0.0338,0.0204,0.0216,0.017,0.9072
