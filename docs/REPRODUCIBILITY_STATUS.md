@@ -1,55 +1,87 @@
 # Reproducibility Status
 
-## Why this file exists
+この研究は、最初から論文用の実験環境を作って始めたものではありません。
 
-This research series was developed interactively with AI assistance. Some experiments were executed from preserved standalone scripts; others were executed in an interactive notebook/tool environment before the publication repository existed.
+ChatGPTとの会話から仮説を思いつき、その場でコードを書いて試し、結果を見て次の実験へ進む、という形で始まりました。そのため、結果CSVや図は残っていても、当時の実行コードが独立した `.py` として残っていない版があります。
 
-For research integrity, the repository must not claim stronger reproducibility than is currently demonstrated.
+公開時にそこを曖昧にしたくないので、再現性を段階分けしています。
 
-## Current status
+## 現在使うラベル
 
-### Preserved exact source
+### `RECONSTRUCTED_AND_VALIDATED`
 
-- V1: standalone Python script preserved.
+実験時の記録からコードを再構築し、同じseed・条件で再実行した結果、保存済みの公開対象CSVと一致したもの。
 
-### Outputs preserved
+現在ここまで確認できたのは：
 
-The result tables, reports, and figures generated during V1–V8.1 have been preserved locally and are being migrated into this repository.
+- **V5.1** — 12行 × 8列、全セル完全一致
+- **V6** — 3行 × 10列、全セル完全一致
+- **V7.1** — 5行 × 9列、全セル完全一致
+- **V8.1** — 3行 × 12列、全セル完全一致
 
-### Source reconstruction required before v1.0 DOI release
+詳細は `docs/VALIDATION_LOG.md` に残しています。
 
-For V2–V8.1, the experiment logic and executed code are preserved in the AI-assisted development record, but not every version currently exists as a standalone, independently rerunnable `.py` file in this repository.
+### `CORE_SOURCE_PRESERVED_AGGREGATOR_PENDING`
 
-Before the DOI-bearing v1.0 release, each published experiment must be assigned one of these evidence labels:
+実験のコアロジックは保存されているが、公開している集計値を作った当時の集計ドライバまで完全には保存されていないもの。
 
-- `EXACT_REPRODUCIBLE`: preserved source reruns and reproduces the published metrics within expected stochastic tolerance.
-- `RECONSTRUCTED_AND_VALIDATED`: source reconstructed from the executed record, then rerun and compared against the preserved outputs.
-- `OUTPUT_ONLY`: preserved result output exists, but exact source has not yet been independently validated.
+- **V1**
 
-No `OUTPUT_ONLY` experiment should be presented as fully reproducible.
+V1では1個体を動かすコアスクリプトは残っていますが、「1000試行平均」を作った当時の集計部分が独立ファイルとして確認できていません。
 
-## Required validation procedure
+以前はV1を `EXACT_REPRODUCIBLE` と整理していましたが、これは表現が強すぎたため訂正しました。
 
-For each experiment:
+### `OUTPUT_PRESERVED_SOURCE_PENDING`
 
-1. save the exact or reconstructed code in `experiments/`;
-2. pin the relevant Python/package environment where practical;
-3. record random seed(s), number of runs, and parameters;
-4. rerun the script;
-5. compare regenerated metrics with the preserved published values;
-6. explain any mismatch rather than silently replacing the historical result;
-7. retain corrected versions separately where a design flaw was found.
+結果CSV、図、レポートは保存されているが、元実行コードの独立再現まで終わっていないもの。
 
-## Known corrective experiments
+- V2
+- V3.1
+- V4
 
-The series intentionally retains design failures and corrections, including:
+### `SUPERSEDED_BUT_RETAINED`
 
-- V3 → V3.1: removal of impossible actor-directed actions from the natural-obstruction condition;
-- V5 → V5.1: separation of memory persistence from policy-lock / insufficient exploration effects;
-- V7 → V7.1: removal of a false-positive mechanism that rewarded self-repair actions even when the corresponding self-model dimension had not been damaged.
+設計上の問題が見つかり、後の修正版に置き換えたもの。ただし失敗履歴として削除しません。
 
-These corrections are part of the evidence history and must remain visible in the final report.
+- V3 → V3.1
+- V5 → V5.1
+- V7 → V7.1
+- V8 → V8.1
 
-## Publication rule
+## なぜ失敗版も残すのか
 
-The final external report may describe the entire exploratory sequence, but the repository must identify the reproducibility status of every quantitative result.
+この研究で面白かったのは、最初の仮説がきれいに当たったことではなく、何度も「これは違う」と分かったことでした。
+
+たとえば、
+
+- V3では、相手が存在しない自然障害なのに対人行動を選べてしまった
+- V5では、「恨みの持続」に見えたものへ方針ロックが混ざっていた
+- V7では、自己モデルが傷ついていないのにrepairが得になる設計漏れがあった
+
+という問題がありました。
+
+それを消して完成版だけ残すと、研究過程を実際よりきれいに見せることになります。そのため修正版と一緒に残します。
+
+## v1.0公開までに必要なこと
+
+V2・V3.1・V4について、可能な範囲でコードを再構築し、保存済み数値と照合します。
+
+一致すれば `RECONSTRUCTED_AND_VALIDATED` へ上げます。
+
+一致しなければ、保存結果を書き換えて合わせることはしません。
+
+- 元の保存結果
+- 再構築版の結果
+- 差が生じた理由として考えられること
+
+を分けて公開します。
+
+## 現在の検証環境
+
+2026-09-16時点の再実行確認環境：
+
+- Python 3.13.5
+- NumPy 2.3.5
+- pandas 2.2.3
+
+最終リリースでは、必要な依存関係もリポジトリに固定します。
