@@ -1,50 +1,80 @@
-# Publication Plan
+# この研究をどう公開するか
 
-## Status
+この研究は、いきなり「論文です」と出すのではなく、**何をやったかを追える形で順番に公開する**方針です。
 
-Current status: **pre-release research archive preparation**.
+現在はまだv1.0公開前です。実験はV8.1まで終わっていますが、再現性の確認、コードとデータの整理、先行研究との比較、最終レポートの更新を進めています。
 
-The repository is being prepared for a public v1.0 research release. The intended publication path is:
+## 公開の順番
 
-1. GitHub repository as the transparent working archive and reproducibility source.
-2. Zenodo archive of the v1.0 GitHub release to obtain a DOI and persistent citation target.
-3. note article as the main Japanese-language public narrative.
-4. X posts as discovery and distribution channels pointing to the note article and DOI-backed archive.
-5. YouTube only after written-publication response is observed, using the strongest misunderstandings, questions, and results to shape the video.
+まずGitHubを、この研究の正本にします。
 
-## Release gate for v1.0
+ここには、できるだけ
 
-Do not create the DOI-bearing v1.0 release until all of the following are true:
+- 実験コード
+- パラメータ
+- 結果データ
+- グラフ
+- 設計ミスと修正版
+- 先行研究との比較
+- AIをどこまで使ったか
 
-- [ ] final report includes a formal related-work section;
-- [ ] the distinction between functional emotion-like behavior and subjective feeling is explicit throughout;
-- [ ] negative findings and failed designs are retained;
-- [ ] corrected experiments supersede flawed versions without deleting the historical record;
-- [ ] experiment data intended to support published claims are present;
-- [ ] exact or reconstructed source code status is documented for every experiment;
-- [ ] author metadata is fixed as Shinobu Fukuoka / 福岡 忍;
-- [ ] AI-assistance disclosure is present;
-- [ ] license choice is explicitly approved by the author;
-- [ ] repository contents are reviewed for personal, confidential, or unrelated business data;
-- [ ] release title, version, abstract, and citation metadata are internally consistent.
+を残します。
 
-## Public framing
+その状態でv1.0を固定し、Zenodoへ保存してDOIを取得します。
 
-Preferred framing:
+その後、日本語で読みやすい形にしたnote記事を公開します。Xは、その記事や研究本体を知ってもらう入口として使います。
 
-> An AI-assisted exploratory computational study that began from the hypothesis that attachment to valued objects may be a basic driver of emotion-like behavior, then progressively revised that hypothesis through negative results, ablations, and corrective experiments.
+YouTubeは最初から作りません。noteやXを出した後に、どこが面白がられたか、どこが誤解されたか、何を質問されたかを見てから動画へします。
 
-Avoid claims such as:
+予定している順番は、
 
-- "We created real emotions in AI."
-- "This proves how human emotion works."
-- "This is the first computational theory of emotion."
-- "The simulations demonstrate subjective feeling."
+> **GitHub → Zenodo（DOI）→ note → X → YouTube**
 
-## Current candidate title
+です。
+
+## v1.0を出す前に確認すること
+
+公開を急いで、後から「肝心のコードがない」「AI利用を書いていない」「都合の悪い結果が消えている」という状態にはしたくありません。
+
+そのため、v1.0を出す前に次を確認します。
+
+- [ ] 最終レポートに先行研究との正式な比較がある
+- [ ] 「感情様行動」と「本当に感じていること」を混同していない
+- [ ] 失敗結果・否定結果・設計ミスも残っている
+- [ ] V3.1、V5.1、V7.1などの修正版と元の問題が追える
+- [ ] 公開する主張を支える結果データがある
+- [ ] 各実験について、元コードが残っているか、再構成が必要かが明記されている
+- [x] 著者名を 福岡 忍 / Shinobu Fukuoka に固定した
+- [x] AI利用範囲を明示した
+- [x] ライセンス方針を確定した
+- [ ] 個人情報・会社情報・無関係な業務データが混ざっていない
+- [ ] GitHub、レポート、Zenodoのタイトル・要旨・著者情報が一致している
+
+## 外に出す時の言い方
+
+この研究を面白く見せるために、事実以上のことを言う必要はないと思っています。
+
+外部向けには、たとえば次のように説明します。
+
+> **「感情は執着から始まるのでは？」という素朴な疑問から、AIと計算実験を始めた。ところが実験を続けるほど最初の仮説では説明できない現象が出てきて、記憶、期待、自己モデル、身体状態まで必要になった。その修正過程も含めて公開する探索研究。**
+
+逆に、次のような言い方はしません。
+
+- 「AIに本物の感情を作った」
+- 「人間の感情の仕組みを証明した」
+- 「世界初の感情理論を発見した」
+- 「AIが恐怖や悲しみを感じた」
+
+## タイトル候補
+
+研究版の英語タイトルは、現時点では次を候補にしています。
 
 **From Attachment to Emotion-Like Control: An AI-Assisted Exploratory Computational Study of Value, Memory, Prediction Error, Self-Models, and Body-State Feedback**
 
-Japanese public title candidate:
+一般向けの日本語タイトルは、
 
 **「感情は執着から生まれる？」AIと計算実験を重ねたら、最初の仮説は壊れた**
+
+を第一候補にしています。
+
+こちらの方が、この研究が「最初から答えを持っていた話」ではなく、**疑問を実際に試し、壊れたところから考え直した記録**だと伝わるからです。
