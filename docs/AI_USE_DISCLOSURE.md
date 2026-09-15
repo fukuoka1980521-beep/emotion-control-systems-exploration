@@ -1,49 +1,81 @@
-# AI Use Disclosure
+# AIをどこまで使ったか
 
-This project used AI systems extensively throughout the exploratory research process.
+この研究は、AIをかなり深く使っています。
 
-## Human contribution
+そのため、外から見た時に「どこまで人間が考えて、どこからAIが作ったのか」が分からなくならないよう、最初から明示しておきます。
 
-The human originator:
+## 出発点は人間側です
 
-- proposed the initial conceptual hypothesis that attachment may be a major route into emotion,
-- decided whether to continue, stop, or extend each experimental direction,
-- challenged interpretations and requested additional tests,
-- requested that failures and null findings be preserved,
-- requested external literature comparison and public dissemination.
+研究の最初の問いは、私（福岡 忍）がChatGPTとの会話の中で出したものでした。
 
-## AI contribution
+> **「感情につながる一番の道は、執着なんじゃないか？」**
 
-AI systems were used for:
+そこから、
 
-- conceptual discussion and hypothesis refinement,
-- simulation design,
-- code generation,
-- execution of computational experiments,
-- generation of tables and figures,
-- identification of confounds and implementation errors,
-- corrective experiment design,
-- interpretation and synthesis,
-- literature-search support,
-- drafting and editing research documentation.
+- 実際にモデルを作って試してみる
+- 結果がおかしければ疑う
+- うまくいかなかった結果も残す
+- 別の条件を追加して再実験する
+- 最後に外部の研究と照合する
 
-## Important limitation
+という進め方を選びました。
 
-Because AI participated directly in design, implementation, analysis, and writing, this work should not be presented as an independently conducted conventional academic study.
+どの実験を続けるか、どこで仮説を疑うか、どの結果を公開するかは、人間側で判断しています。
 
-The public package is instead positioned as an **AI-assisted exploratory computational research project**.
+## AIに任せたこと
 
-Before any peer-reviewed or preprint submission, relevant venue policies on AI authorship, disclosure, and generated content must be checked and followed.
+一方で、ChatGPTは単なる文章校正だけには使っていません。
 
-## Verification principle
+この研究では、AIを次のような作業に使いました。
 
-AI-generated explanations are not treated as evidence by themselves. Claims in the public report should be tied to one of the following:
+- 仮説を実験可能な形へ分解する
+- シミュレーションの設計案を作る
+- Pythonコードを書く
+- 実験を実行する
+- CSVやグラフを作る
+- 結果を読み、次の実験案を出す
+- 設計ミスや交絡を見つける
+- 修正実験を作る
+- 先行研究を探す
+- レポートやGitHub文書の草案を書く
 
-1. executed simulation output,
-2. repository code or parameters,
-3. cited external literature,
-4. clearly labeled inference or hypothesis.
+つまり、AIはこの研究の作業工程にかなり深く入っています。
 
-## Authorship
+## だから、普通の学術研究のようには見せません
 
-Persistent author metadata for the DOI release will be finalized before v1.0. AI systems will not be listed as human authors; their role will be disclosed in the methods / acknowledgements / AI-use statement as appropriate to the publication venue.
+この研究を、
+
+> 「人間の研究者が独力で設計・実装・解析した研究」
+
+のように見せるつもりはありません。
+
+より正確には、
+
+> **人間が問いと判断を持ち、AIを研究補助者として大きく使いながら進めた探索的計算研究**
+
+です。
+
+AI利用そのものも、この研究の特徴の一部だと考えています。
+
+## AIの説明そのものは証拠にしません
+
+ChatGPTが「この結果はこういう意味です」と説明しただけでは、研究上の根拠にはしません。
+
+公開時の主張は、できるだけ次のどれかに結びつけます。
+
+1. 実際に実行したシミュレーションの出力
+2. リポジトリ内のコードやパラメータ
+3. 外部の先行研究
+4. 「これは推測・仮説です」と明示した解釈
+
+また、AIが作ったコードにも設計漏れが実際にありました。V3、V5、V7などで問題が見つかり、修正版を作っています。
+
+そのため、**AIが書いたから正しい、AIが確認したから問題ない、とは扱いません。**
+
+## 著者について
+
+公開上の著者は **福岡 忍 / Shinobu Fukuoka** です。
+
+AIを人間の共同著者として表記する予定はありません。ただし、AIが研究工程へ大きく関与した事実は、この文書やレポート内で明示します。
+
+今後、学会・preprint・学術誌などへ出す場合は、その時点の各媒体のAI利用・著者規定を確認し、それに従います。
