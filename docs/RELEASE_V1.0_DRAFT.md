@@ -56,7 +56,7 @@ This AI-assisted exploratory computational study began with the hypothesis that 
 
 ## Reproducibility statement for release notes
 
-At the current pre-release checkpoint, V3.1, V5.1, V6, V7.1, and V8.1 have reconstructed source code that was rerun under documented seeds/conditions and matched the preserved public-result CSVs exactly. V1 retains its core source but the original 1000-run aggregation driver has not been independently verified. V2 and V4 retain result outputs and reports but their independent original-source validation is not yet complete. These differences must remain visible in the archived release.
+At the current pre-release checkpoint, V3.1, V5.1, V6, V7.1, and V8.1 have reconstructed source code that was rerun under documented seeds and conditions and agreed with the preserved public-result CSVs within a machine-precision numerical tolerance (`rtol=1e-12`, `atol=1e-12`). This tolerance is used only for binary floating-point representation differences such as `0.53275` versus `0.5327500000000001`; larger differences fail validation. V1 retains its core source but the original 1000-run aggregation driver has not been independently verified. V2 and V4 retain result outputs and reports but their independent original-source validation is not yet complete. These differences must remain visible in the archived release.
 
 ## AI-use statement
 
